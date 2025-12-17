@@ -6,7 +6,7 @@ from torchvision import transforms
 from dataset import BurstDeflickerDataset
 from resnet import DeflickerResNet
 from unet import DeflickerUNet
-from loss import CharbonnierLoss
+from loss import CharbonnierLoss, SSIMLoss
 from evaluate import evaluate_model
 
 # 0. 메모리 초기화 및 환경 설정

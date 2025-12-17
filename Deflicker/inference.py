@@ -60,12 +60,12 @@ def run_inference(model_path, input_image_path, output_path):
 # --- 사용 예시 ---
 if __name__ == "__main__":
     # 실제 환경에 맞게 경로를 수정하세요
-    MODEL_FILE = 'best_model.pth' 
-    INPUT_FILE = 'BurstFlicker-S/test-resize/input/0017/277A2867.JPG' # 변환하고 싶은 원본 이미지 경로
-    OUTPUT_FILE = 'inference_results/result_0017.png' # 저장될 경로
-
     # MODEL_FILE = 'best_model.pth' 
-    # INPUT_FILE = 'BurstFlicker-S/test-resize/input/0008/277A2629.JPG' # 변환하고 싶은 원본 이미지 경로
-    # OUTPUT_FILE = 'inference_results/result_0008.png' # 저장될 경로
+    # INPUT_FILE = 'BurstFlicker-S/test-resize/input/0017/277A2867.JPG' # 변환하고 싶은 원본 이미지 경로
+    # OUTPUT_FILE = 'inference_results/result_0017.png' # 저장될 경로
+
+    MODEL_FILE = 'best_model.pth' 
+    INPUT_FILE = 'BurstFlicker-S/test-resize/input/0008/277A2629.JPG' # 변환하고 싶은 원본 이미지 경로
+    OUTPUT_FILE = 'inference_results/result_0008.png' # 저장될 경로
     
     run_inference(MODEL_FILE, INPUT_FILE, OUTPUT_FILE)
