@@ -2,7 +2,8 @@ import torch
 import os
 from PIL import Image
 from torchvision import transforms
-from model import DeflickerResNet  # 기존에 만든 모델 클래스
+from unet import DeflickerUNet  # 기존에 만든 모델 클래스
+from resnet import DeflickerResNet
 
 def run_inference(model_path, input_image_path, output_path):
     # 1. 디바이스 설정 (VRAM 부족 시 'cpu'로 변경하세요)
@@ -11,7 +12,8 @@ def run_inference(model_path, input_image_path, output_path):
 
     # 2. 모델 로드
     # 학습할 때 사용한 num_blocks와 동일해야 합니다 (기본 12)
-    model = DeflickerResNet(in_channels=3, num_blocks=6).to(device)
+    # model = DeflickerUNet(in_channels=3).to(device)
+    model = DeflickerResNet(in_channels=3, num_blocks=34).to(device)
     
     try:
         model.load_state_dict(torch.load(model_path, map_location=device))
@@ -59,7 +61,11 @@ def run_inference(model_path, input_image_path, output_path):
 if __name__ == "__main__":
     # 실제 환경에 맞게 경로를 수정하세요
     MODEL_FILE = 'best_model.pth' 
-    INPUT_FILE = 'BurstFlicker-S/test-resize/input/0008/277A2629.JPG' # 변환하고 싶은 원본 이미지 경로
-    OUTPUT_FILE = 'inference_results/result_0008.png' # 저장될 경로
+    INPUT_FILE = 'BurstFlicker-S/test-resize/input/0017/277A2867.JPG' # 변환하고 싶은 원본 이미지 경로
+    OUTPUT_FILE = 'inference_results/result_0017.png' # 저장될 경로
+
+    # MODEL_FILE = 'best_model.pth' 
+    # INPUT_FILE = 'BurstFlicker-S/test-resize/input/0008/277A2629.JPG' # 변환하고 싶은 원본 이미지 경로
+    # OUTPUT_FILE = 'inference_results/result_0008.png' # 저장될 경로
     
     run_inference(MODEL_FILE, INPUT_FILE, OUTPUT_FILE)
