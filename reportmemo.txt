@@ -1,0 +1,49 @@
+딥러닝 보고서 목차
+
+1. 개요
+
+- 프로젝트 목적 및 필요성 요약
+- 방법론 요약
+- 결과 요약
+
+2. 목적 및 필요성
+
+- 주제발표에서 제시했던 Flickering Artifact 문제에 대해서 쓰기
+	- 전후 프레임 정보 없이 **단일 이미지(Single Image)**만으로 플리커 패턴을 인식하고 제거하는 딥러닝 모델 개발.
+	- 비디오 데이터가 아닌 단일 사진 한 장만 있는 실질적인 문제 상황 해결.
+- 왜 딥러닝을 이용해야 하는지 중간보고서 참고하여 적기
+
+3. 실험 방법
+
+- Model Structure
+	- ResNet 구조
+	- 입력 채널: 3xWxH (RGB 3채널)
+	- Residual Block 12, 18, 더 늘려서 실험해봄
+	
+	- U-Net 구조 (Depth = 3)
+	- 입력 채널: 3xWxH (RGB 3채널)
+
+- Deflicker Dataset
+	- BurstFlicker-S (Input: 플리커 이미지 / GT: 깨끗한 이미지)
+	- 실제 Flicker, 빠른 셔터 연사-input / 느린 셔터-gt
+	- 400개의 scene 중 350개의 train scene / 50개의 test scene
+	- 10개 내외의 input / 2장의 gt (데이터 증강의 효과)
+	- train set: input 10개 중 3개 입력 / gt는 2장 중 하나 사용 (무작위) -------dataplot사용
+	- test set: input 10개 중 1개 입력
+	- 256 by 256 resize로 downsampling
+	- 이미지 텐서화 및 [0, 1] 범위로 정규화 (PyTorch)
+	
+- Loss
+	- Charbonnier Loss for Training
+	- Evaluation 과정에서 PSNR 측정 (이유: input과 gt 파일이 높은 정밀도로 제공되기 때문에, 픽셀 by 픽셀로 비교
+	- 
+	- SSIM Loss 추가함.
+	
+4. 실험 결과
+	- ResNet과 U-Net의 Loss Landscape의 비교 (log 파일 따로 보관해두고, 한 plot으로 같이 그려서 비교하기
+	- eval_results 이미지 epoch 진행에 따라 나열하여 변화 과정 보여주기
+	- test set의 이미지로 Deflicker 해보고, 이미지 세부 분석 (무엇은 개선하였고, 무엇을 개선하지 못했는지)
+	
+5. 결론(간결)
+	- 전체요약
+	- 아쉬운 점(발전 가능성)
