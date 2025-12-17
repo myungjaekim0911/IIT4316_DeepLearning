@@ -32,8 +32,8 @@ train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 test_loader = DataLoader(test_dataset, batch_size=1, shuffle=False)
 
 # 2. 모델 선언 (in_channels=3 확인)
-# model = DeflickerUNet(in_channels=3).to(device)
-model = DeflickerResNet(in_channels=3, num_blocks=34).to(device)
+model = DeflickerUNet(in_channels=3).to(device)
+# model = DeflickerResNet(in_channels=3, num_blocks=34).to(device)
 criterion = CharbonnierLoss().to(device)
 optimizer = torch.optim.Adam(model.parameters(), lr=lr)
 
